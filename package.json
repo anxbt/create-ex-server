@@ -16,10 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/harshk200/create-express-starter"
+    "url": "https://github.com/"
   },
   "keywords": [],
-  "author": "Harsh Kapadia",
+  "author": "Code Krunker(HackCBS)",
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.1",

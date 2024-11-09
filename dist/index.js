@@ -6548,7 +6548,7 @@ async function init() {
         }
     }
     // doing ../.. (because the path considers index.mjs file as a directory) for e.g. create-express-starter/dist/index.mjs note /index.mjs
-    const templateDir = path.resolve(node_url.fileURLToPath((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.tagName.toUpperCase() === 'SCRIPT' && _documentCurrentScript.src || new URL('bundle.js', document.baseURI).href))), "../..", `template-${template}`);
+    const templateDir = path.resolve(node_url.fileURLToPath((typeof document === 'undefined' ? require('u' + 'rl').pathToFileURL(__filename).href : (_documentCurrentScript && _documentCurrentScript.tagName.toUpperCase() === 'SCRIPT' && _documentCurrentScript.src || new URL('index.js', document.baseURI).href))), "../..", `template-${template}`);
     // looping thorugh the template dir and copying the files to new-project dir
     const files = fs.readdirSync(templateDir);
     for (const file of files) {
@@ -6576,4 +6576,3 @@ async function init() {
 init().catch((e) => {
     console.error(e);
 });
-//# sourceMappingURL=bundle.js.map
