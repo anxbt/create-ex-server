@@ -1,5 +1,5 @@
 {
-  "name": "create-expressjs-server",
+  "name": "create-exjs-server",
   "version": "1.0.0",
   "description": "A simple light and fast cli tool to bootstrap a express.js project",
   "bin": {
