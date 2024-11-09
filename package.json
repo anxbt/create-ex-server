@@ -6,7 +6,7 @@
     "create-ex-server": "bin/index.js"
   },
   "scripts": {
-    "build": "npx tsc && mv ./dist/index.js ./dist/index.mjs",
+    "build": "npx rollup -c ./rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
