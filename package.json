@@ -1,6 +1,6 @@
 {
   "name": "create-exjs-server",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple light and fast cli tool to bootstrap a express.js project",
   "bin": {
     "create-ex-server": "bin/index.js"
