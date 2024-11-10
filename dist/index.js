@@ -5,6 +5,7 @@ var require$$2 = require('events');
 var fs = require('node:fs');
 var path = require('node:path');
 var node_url = require('node:url');
+var node_child_process = require('node:child_process');
 
 var _documentCurrentScript = typeof document !== 'undefined' ? document.currentScript : null;
 function getDefaultExportFromCjs (x) {
@@ -6509,6 +6510,12 @@ async function init() {
                 message: "Enable cors?",
                 initial: true,
             },
+            {
+                type: "toggle",
+                name: "enableInstall",
+                message: "Do you want to run npm install?",
+                initial: true,
+            },
         ], {
             onCancel: () => {
                 throw new Error(red("✖") + " Operation cancelled");
@@ -6522,7 +6529,7 @@ async function init() {
     // user's choice from the prompt
     // prettier-ignore
     // @ts-ignore
-    const { projectname, overwrite, packageName, hotReloading, enableCors } = result;
+    const { projectname, overwrite, packageName, hotReloading, enableCors, enableInstall } = result;
     // NOTE: root of the new project will be created
     const root = path.join(process.cwd(), targetDir);
     if (overwrite === "yes") {
@@ -6566,6 +6573,11 @@ async function init() {
     }
     fs.writeFileSync(path.join(root, "package.json"), JSON.stringify(pkgJSON, null, 2));
     const cdProjectName = path.relative(process.cwd(), root);
+    if (enableInstall) {
+        console.log("installing dependencies...");
+        node_child_process.execSync("npm install", { cwd: root });
+        return;
+    }
     console.log("\nFinished setting up your express project 🚀. Now run:");
     if (process.cwd() !== root) {
         console.log(`  cd ${cdProjectName.includes(" ") ? `"${cdProjectName}"` : cdProjectName}`);

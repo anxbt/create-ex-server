@@ -3,6 +3,7 @@ import fs from "node:fs";
 import colors from "picocolors";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { execSync } from "node:child_process";
 
 // ************************* Helper functions *************************
 
@@ -173,6 +174,13 @@ async function init() {
           message: "Enable cors?",
           initial: true,
         },
+
+        {
+          type: "toggle",
+          name: "enableInstall",
+          message: "Do you want to run npm install?",
+          initial: true,
+        },
       ],
 
       {
@@ -189,7 +197,7 @@ async function init() {
   // user's choice from the prompt
   // prettier-ignore
   // @ts-ignore
-  const { projectname, overwrite, packageName, hotReloading, enableCors } = result;
+  const { projectname, overwrite, packageName, hotReloading, enableCors, enableInstall } = result;
 
   // NOTE: root of the new project will be created
   const root = path.join(process.cwd(), targetDir);
@@ -247,6 +255,12 @@ async function init() {
   );
 
   const cdProjectName = path.relative(process.cwd(), root);
+  if (enableInstall) {
+    console.log("installing dependencies...")
+    execSync("npm install", { cwd: root });
+
+    return;
+  }
   console.log("\nFinished setting up your express project 🚀. Now run:");
   if (process.cwd() !== root) {
     console.log(
